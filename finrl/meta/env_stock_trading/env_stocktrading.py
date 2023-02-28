@@ -23,8 +23,25 @@ def action_dim(space):
         return int(space.n)
     else:
         raise ValueError
+def get_space_shape(space: gym.spaces.Space) -> Tuple[int, ...]:
+    if isinstance(space, gym.spaces.Box):
+        return tuple(space.shape)
+    elif isinstance(space, gym.spaces.Discrete):
+        return (1, )
+    else:
+        raise ValueError
+
+def state_shape(self):
+        """The shape of observation space."""
+        if isinstance(self.observation_space, gym.spaces.Tuple):
+            return tuple(map(get_space_shape, self.observation_space))
+        else:
+            return get_space_shape(self.observation_space)
+
         
 DummyVecEnv.action_dim=action_dim
+DummyVecEnv.state_shape=state_shape
+
 
 class StockTradingEnv(gym.Env):
     """A stock trading environment for OpenAI gym"""
