@@ -15,6 +15,16 @@ matplotlib.use("Agg")
 
 # from stable_baselines3.common.logger import Logger, KVWriter, CSVOutputFormat
 
+def action_dim(space):
+    """The dimension of action assuming that the action is flatten."""
+    if isinstance(space, gym.spaces.Box):
+        return int(np.prod(space.shape))
+    elif isinstance(space, gym.spaces.Discrete):
+        return int(space.n)
+    else:
+        raise ValueError
+        
+DummyVecEnv.action_dim=action_dim
 
 class StockTradingEnv(gym.Env):
     """A stock trading environment for OpenAI gym"""
