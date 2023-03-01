@@ -31,7 +31,7 @@ def get_space_shape(space: gym.spaces.Space) -> Tuple[int, ...]:
     else:
         raise ValueError
 
-def state_shape(self):
+def state_shape(space):
         """The shape of observation space."""
         if isinstance(self.observation_space, gym.spaces.Tuple):
             return tuple(map(get_space_shape, self.observation_space))
