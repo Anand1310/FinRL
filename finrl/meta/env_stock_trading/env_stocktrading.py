@@ -72,6 +72,7 @@ class StockTradingEnv(gym.Env):
         mode="",
         iteration="",
     ):
+        super(StockTradingEnv,self).__init__()
         self.day = day
         self.df = df
         self.stock_dim = stock_dim
