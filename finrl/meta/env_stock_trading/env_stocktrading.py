@@ -418,7 +418,7 @@ class StockTradingEnv(gym.Env):
 
         self.episode += 1
 
-        return self.state
+        return np.array(self.state)
 
     def render(self, mode="human", close=False):
         return self.state
